@@ -1,5 +1,6 @@
 #pythamon the text pokemon game
-import random
+import random, sys
+original_stdout = sys.stdout
 
 petHealth = 100
 enemyHealth = 100
@@ -85,13 +86,13 @@ while optionTrue == 0:
                         elif xp > 3000 and xp < 7000:
                             level = 2
                             enemyHealth = 300
-                            petHealth = petHealth + 100
+                            petHealth = 200
                             enemyAttack1 = random.randint(10, 100)
                                         
                         elif xp > 7000 and xp < 14000:
                             level = 3
                             enemyHealth = 400
-                            petHealth = petHealth + 50
+                            petHealth = 250
                                     
                         elif xp > 14000:
                             level = level+1
@@ -139,13 +140,13 @@ while optionTrue == 0:
                                 elif xp > 3000 and xp < 7000:
                                     level = 2
                                     enemyHealth = 300
-                                    petHealth = petHealth + 100
+                                    petHealth = 200
                                     enemyAttack1 = random.randint(10, 100)
                                         
                                 elif xp > 7000 and xp < 14000:
                                     level = 3
                                     enemyHealth = 400
-                                    petHealth = petHealth + 50
+                                    petHealth = 250
                                             
                                 elif xp > 14000:
                                     level = level+1
@@ -193,13 +194,13 @@ while optionTrue == 0:
                                 elif xp > 3000 and xp < 7000:
                                     level = 2
                                     enemyHealth = 300
-                                    petHealth = petHealth + 100
+                                    petHealth = 200
                                     enemyAttack1 = random.randint(10, 100)
                                         
                                 elif xp > 7000 and xp < 14000:
                                     level = 3
                                     enemyHealth = 400
-                                    petHealth = petHealth + 50
+                                    petHealth = 250
                                             
                                 elif xp > 14000:
                                     level = level+1
@@ -246,13 +247,13 @@ while optionTrue == 0:
                                 elif xp > 3000 and xp < 7000:
                                     level = 2
                                     enemyHealth = 300
-                                    petHealth = petHealth + 100
+                                    petHealth = 200
                                     enemyAttack1 = random.randint(10, 100)
                                         
                                 elif xp > 7000 and xp < 14000:
                                     level = 3
                                     enemyHealth = 400
-                                    petHealth = petHealth + 50
+                                    petHealth = 250
                                             
                                 elif xp > 14000:
                                     level = level+1
@@ -316,7 +317,37 @@ while optionTrue == 0:
                     print("Come again soon!\n")
 
     elif option == 4:
-        print("Saving game...\n")
-        fh = file.open('test.txt', 'w')
+        fileName = input("Name Save: ")
+        print("\nSaving game...\n")
+        file = open(fileName + '.txt', 'w')
+        with file as fw:
+            sys.stdout = fw
+            print(name)
+            print(petName)
+            print(level)
+            print(gold)
+            print(potions)
+            print(xp)
+            sys.stdout = original_stdout
+            print("File saved\n")
+        fw.close()
+
+    elif option == 5:
+        fileName = input("Enter the save name you wish to load\n")
+        with open(fileName + '.txt', 'r') as file:
+            name = file.readline()
+            print("Name: ", name)
+            petName = file.readline()
+            print("\nPet name: ", petName)
+            str(level) = file.readline()
+            print("\nLevel: ", level)
+            str(gold) = file.readline()
+            print("\nGold: ", gold)
+            potions = file.readline()
+            print("\nPotions: ", potions)
+            xp = file.readline()
+            print("\nXP: ", xp)
+        file.close()
+        
         
                     
