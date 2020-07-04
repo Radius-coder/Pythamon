@@ -339,14 +339,16 @@ while optionTrue == 0:
             print("Name: ", name)
             petName = file.readline()
             print("\nPet name: ", petName)
-            str(level) = file.readline()
+            level = file.readline()
             print("\nLevel: ", level)
-            str(gold) = file.readline()
+            gold = file.readline()
             print("\nGold: ", gold)
             potions = file.readline()
             print("\nPotions: ", potions)
             xp = file.readline()
             print("\nXP: ", xp)
+            gold = int(gold)
+            xp = int(xp)
         file.close()
         
         
