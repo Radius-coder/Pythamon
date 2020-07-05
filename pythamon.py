@@ -359,7 +359,6 @@ while optionTrue == 0:
         ePotions = encryption(potions)
         eMPotions = encryption(mPotions)
         eNet = encryption(net)
-        eCollection = encryption(collection)
         file = open(fileName + '.txt', 'w')
         with file as fw:
             sys.stdout = fw
@@ -371,7 +370,7 @@ while optionTrue == 0:
             print(ePotions)
             print(eMPotions)
             print(eNet)
-            print(eCollection)
+            print(collection)
             sys.stdout = original_stdout
             print("File saved\n")
         fw.close()
@@ -411,7 +410,6 @@ while optionTrue == 0:
             net = decryption(net)
             print("Capture Nets: ", net)
             collection = file.readline()
-            collection = decryption(collection)
             print("Collection: ", collection)
             level = int(level)
             gold = int(gold)
