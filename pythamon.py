@@ -3,21 +3,26 @@ import random, sys
 original_stdout = sys.stdout
 
 petHealth = 100
+petMana = 100
 enemyHealth = 100
 name      = ""
 petName   = ""
 petStamina  = 100
 petAlive = 0
 
-enemyName = ["Bob", "Dani", "Alex", "Peter"]
+enemyName = ["Bob", "Dani", "Alex", "Peter", "Tyler", "Charlie", "Ryan", "Chris", "Jordan", "Tom"]
 potions = 1
 potionRegen = 95
+mPotions = 1
+mPotionRegen = 100
+net = 1
+netPower = random.randint(1, 10)
 gold      = 300
 xp = 0
 level = 0
-inventory = []
+collection = []
 
-moves = ["Bite", "Slash", "Headbutt", "Dig", "Run"]
+moves = ["Bite", "Slash", "Magic 25", "Magic 50", "Capture", "Run"]
 
 petAttack1 = random.randint(1, 30)
 petAttack2 = random.randint(20, 50)
@@ -31,53 +36,56 @@ petName = input("Enter your pet name: ")
 
 print("\nHello", name + " and", petName)
 
+
+
+
 optionTrue = 0
 while optionTrue == 0:
     
     if  xp > 1000 and xp < 3000:
-        level = 1
-        enemyHealth = 200
-                                        
+                    level = 1
     elif xp > 3000 and xp < 7000:
-        level = 2
-        enemyHealth = 300
-        petHealth = 200
-        enemyAttack1 = random.randint(10, 100)
-                                        
+                    level = 2
+                    petHealth = 200
     elif xp > 7000 and xp < 14000:
-        level = 3
-        enemyHealth = 400
-        petHealth = 250
-                                            
+                    level = 3
+                    petHealth = 250
     elif xp > 14000:
-        level = level+1
-        enemyHealth = 500
-        petHealth = petHealth + 100
-        enemyAttack1 = random.randint(20, 100)
-    else:
-        enemyAttack1 = random.randint(1, 50)
+                    level = level+1
+                    
+    
+    netPower = random.randint(1, 10)
                                 
 
     print("You are level: ", level, " with", xp, " xp")
-    print("Your pet has", petHealth, " health\n")
-    option = int(input("Select Option: \n1. Fight \n2. Check Inventory\n3. Shop\n4. Save\n5. Load\n"))
+    print("Your pet has", petHealth, "health and have", petMana, "mana remaining!\n")
+    option = int(input("Select Option: \n1. Fight \n2. Check Inventory\n3. Shop\n4. Save\n5. Load\n6. Pythamex\n"))
 
     if petAlive == 1:
         print("Your pet is unconcious. Please use a potion.\n")
         
     if option == 1:
-        print("You are fighting", enemyName[random.randint(1,3)], "\n")
-
+        currentEnemy = enemyName[random.randint(1,9)]
+        print("You are fighting", currentEnemy , "\n")
+        enemyHealth = 100
         attackTrue = 0
         while attackTrue == 0:
            
             while petHealth > 0 or enemyHealth > 0:
                     
-                print("Select Move: \n1.",moves[0] + "\n2.",moves[1] + "\n3.",moves[2] + "\n4.",moves[3] + "\n5.",moves[4])
+                print("Select Move: \n1.",moves[0] + "\n2.",moves[1] + "\n3.",moves[2] + "\n4.",moves[3] + "\n5.",moves[4] + "\n6.",moves[5])
                 attack = input()
                     
                     
                 if attack == "1":
+                    if xp > 3000 and xp < 7000:
+                        enemyAttack1 = random.randint(10, 100)
+                    elif xp > 14000:
+                        enemyAttack1 = random.randint(20, 100)
+                    else:
+                        enemyAttack1 = random.randint(1, 50)
+                        
+                    petAttack1 = random.randint(1, 30)
                     enemyHealth = enemyHealth - petAttack1
                     print("You did ",petAttack1,  " damage to the enemy")
                     if enemyHealth <=0:
@@ -109,39 +117,56 @@ while optionTrue == 0:
                         attackTrue = 0
 
                 elif attack == "2":
-                             enemyHealth = enemyHealth - petAttack2
-                             print("You did ",petAttack2,  " damage to the enemy\n")
-                             if enemyHealth <=0:
-                                print("You have defeated the enemy!\n")
-                                gold = gold + random.randint(10, 300)
-                                tempxp =  random.randint(100,1000)
-                                print("You gained",tempxp, "xp\n")
-                                print("You now have", gold, "gold\n")
-                                xp = xp + tempxp
-                                
-                                attackTrue=1
-                                break
-                             else:
-                                 print("They are now on", enemyHealth , " health\n")
+                    if xp > 3000 and xp < 7000:
+                        enemyAttack1 = random.randint(10, 100)
+                    elif xp > 14000:
+                        enemyAttack1 = random.randint(20, 100)
+                    else:
+                        enemyAttack1 = random.randint(1, 50)
 
-                             petHealth = petHealth - enemyAttack1
-                             print("They did ",enemyAttack1,  " damage to you\n")
-                             print("You are now on", petHealth , " hp\n")
+                    petAttack2 = random.randint(20, 50)
+                    enemyHealth = enemyHealth - petAttack2
+                    print("You did ",petAttack2,  " damage to the enemy\n")
+                    if enemyHealth <=0:
+                        print("You have defeated the enemy!\n")
+                        gold = gold + random.randint(10, 300)
+                        tempxp =  random.randint(100,1000)
+                        print("You gained",tempxp, "xp\n")
+                        print("You now have", gold, "gold\n")
+                        xp = xp + tempxp
+                        attackTrue=1
+                        break
+                    else:
+                            print("They are now on", enemyHealth , " health\n")
+                            petHealth = petHealth - enemyAttack1
+                            print("They did ",enemyAttack1,  " damage to you\n")
+                            print("You are now on", petHealth , " hp\n")
 
                             
-                             if petHealth <=0:
+                            if petHealth <=0:
                                 print("Your pet has fainted!\n")
                                 print("Visit a shop to buy health potions...\n")
                                 petAlive=1
                                 attackTrue=1
                                 break
 
-                             else:
+                            else:
                                 print("Prepare for the next move...\n")
                                 attackTrue = 0
 
 
                 elif attack == "3":
+                    if xp > 3000 and xp < 7000:
+                        enemyAttack1 = random.randint(10, 100)
+                    elif xp > 14000:
+                        enemyAttack1 = random.randint(20, 100)
+                    else:
+                        enemyAttack1 = random.randint(1, 50)
+                    if petMana <25:
+                        print("Not enough mana! Select a different move\n")
+                    else:
+                            petMana-=25
+                            petAttack3 = random.randint(40, 100)
                             enemyHealth = enemyHealth - petAttack3
                             print("You did ",petAttack3,  " damage to the enemy\n")
                             if enemyHealth<=0:
@@ -158,7 +183,7 @@ while optionTrue == 0:
 
                             petHealth = petHealth - enemyAttack1
                             print("They did ",enemyAttack1,  " damage to you\n")
-                            print("You are now on", petHealth , " hp\n")
+                            
                       
 
                             if petHealth <=0:
@@ -169,11 +194,24 @@ while optionTrue == 0:
                                 break
 
                             else:
+                                print("You are now on", petHealth , " health and have", petMana, "mana remaining!\n")
+                                
                                 print("Prepare for the next move...\n")
                                 attackTrue = 0
 
 
                 elif attack == "4":
+                    if xp > 3000 and xp < 7000:
+                        enemyAttack1 = random.randint(10, 100)
+                    elif xp > 14000:
+                        enemyAttack1 = random.randint(20, 100)
+                    else:
+                        enemyAttack1 = random.randint(1, 50)
+                    if petMana <50:
+                        print("Not enough mana! Select a different move\n")
+                    else:
+                            petMana-=50
+                            petAttack4 = random.randint(90, 200)
                             enemyHealth = enemyHealth - petAttack4
                             print("You did ",petAttack4,  " damage to the enemy\n")
                             if enemyHealth<=0:
@@ -204,8 +242,32 @@ while optionTrue == 0:
                                 attackTrue = 0
 
 
-
                 elif attack == "5":
+                    if net <1:
+                        print("Buy a net from the shop to use\n")
+                        attackTrue=0
+                    else:
+                        net-=1
+                        print("You throw the net...\n")
+                        if netPower > 8:
+                            print("Congratulations this monster has been caught!\n")
+                            collection.append(currentEnemy)
+                            gold = gold + random.randint(10, 300)
+                            tempxp =  random.randint(100,1000)
+                            print("You gained",tempxp, "xp\n")
+                            print("You now have", gold, "gold\n")
+                            xp = xp + tempxp
+                            attackTrue=1
+                            break
+                            
+                        else:
+                            print("Capture failed, better luck next time.\n")
+                            netPower = random.randint(1, 10)
+                            print("Prepare for the next move...\n")
+                            attackTrue = 0  
+
+
+                elif attack == "6":
                                 print("You ran away!\n")
                                 attackTrue=1
                                 break
@@ -215,9 +277,9 @@ while optionTrue == 0:
                     
 
     elif option == 2:
-                print("Your inventory: ", inventory, potions, "potion(s)", gold, "gold/n")
-                usePotion = int(input("If you have a potion would you like to use it?\n1. Yes\n2. No\n"))
-                if usePotion == 1:
+                print("Your inventory: \n", potions, "Health potion(s)\n", mPotions, "Magic Potion(s)\n", net, "Capture net(s)\n",  gold, "Gold\n")
+                proceed = int(input("If you have one would you like to use:\n1. Health Potion\n2. Magic Potion\n3. Go back\n"))
+                if proceed == 1:
                     if potions <=0:
                         print("No potions left! Purchase some at the store.\n")
                     else:
@@ -228,20 +290,43 @@ while optionTrue == 0:
                         if petHealth> 0:
                             petAlive = 0
                             attackTrue = 0
+                elif proceed == 2:
+                    if mPotions <= 0:
+                        print("No potions left! Purchase some at the store.\n")
+                    else:
+                        petMana=petMana+mPotionRegen
+                        print("You now have", petMana, "magic\n")
+                        mPotions-=1
+
+                        
                 
     elif option == 3:
                 print("Welcome to the shop, you have", gold, "gold\n")
-                proceed = int(input("Would you like to purchase a health potion for 200 gold?\n1. Yes\n2. No\n"))
+                proceed = int(input("What would you like to buy?\n1. Health Potion - 200\n2. Magic Potion - 200\n3. Capture net - 450\n4. Move learner- 1000\n5. Leave shop\n"))
                 if proceed == 1:
                     if gold > 200:
-                        print("Thank you for your purchase!\nVisit your inventory to use potions")
+                        print("Thank you for your purchase!\nVisit your inventory to use potions\n")
                         potions = potions+1
                         gold = gold - 200
                     else:
                         print("Not enough gold...\n")
-                    
-                    
+
                 elif proceed == 2:
+                    if gold > 200:
+                        print("Thank you for your purchase!\nVisit your inventory to use potions\n")
+                        mPotions = mPotions+1
+                        gold = gold - 200
+
+                    else:
+                        print("Not enough gold...\n")
+
+                elif proceed == 3:
+                    if gold > 450:
+                        print("Thank you for your purchase!\nCapture nets can be used in battle\n")
+                        net +=1
+                        gold = gold - 450
+                    
+                elif proceed == 5:
                     print("Come again soon!\n")
 
     elif option == 4:
@@ -278,6 +363,10 @@ while optionTrue == 0:
             gold = int(gold)
             xp = int(xp)
         file.close()
+
+    elif option == 6:
+                print("Your collection: \n", collection)
+               
         
         
                     
