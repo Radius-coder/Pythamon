@@ -413,8 +413,12 @@ while optionTrue == 0:
             collection = file.readline()
             collection = decryption(collection)
             print("Collection: ", collection)
+            level = int(level)
             gold = int(gold)
             xp = int(xp)
+            potions = int(potions)
+            mPotions = int(mPotions)
+            net = int(net)
         file.close()
 
     elif option == 6:
