@@ -430,4 +430,8 @@ while optionTrue == 0:
             break
         else:
             optionTrue=0
+            
+     else:
+         print("Enter a valid choice.\n")
+         optionTrue=0
                     
