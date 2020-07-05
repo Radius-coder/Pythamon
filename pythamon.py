@@ -60,7 +60,7 @@ while optionTrue == 0:
 
     print("You are level: ", level, " with", xp, " xp")
     print("Your pet has", petHealth, "health and have", petMana, "mana remaining!\n")
-    option = int(input("Select Option: \n1. Fight \n2. Check Inventory\n3. Shop\n4. Save\n5. Load\n6. Pythamex\n"))
+    option = int(input("Select Option: \n1. Fight \n2. Check Inventory\n3. Shop\n4. Save\n5. Load\n6. Pythamex\n0. Quit\n"))
 
     if petAlive == 1:
         print("Your pet is unconcious. Please use a potion.\n")
@@ -423,5 +423,11 @@ while optionTrue == 0:
                 print("Your collection: \n", collection)
                
         
-        
+    elif option == 0:
+        answer = int(input("Are you sure you want to quit...\n1. Yes\n2. No\n"))
+        if answer == 1:
+            optionTrue=1
+            break
+        else:
+            optionTrue=0
                     
