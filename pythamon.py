@@ -6,6 +6,7 @@ from encryptor import decryption
 original_stdout = sys.stdout
 
 petHealth = 100
+petMaxHealth = 100
 petMana = 100
 enemyHealth = 100
 name      = ""
@@ -47,18 +48,23 @@ while optionTrue == 0:
     
     if  xp > 1000 and xp < 3000:
                     level = 1
+                    
     elif xp > 3000 and xp < 7000:
                     level = 2
+                   
     elif xp > 7000 and xp < 14000:
                     level = 3
+                    
     elif xp > 14000:
                     level = level+1
+                    
                     
     
     netPower = random.randint(1, 10)
                                 
-    if petHealth > 200:
-        petHealth = 200
+
+    if petMana > 100:
+        petMana = 100
     print("You are level: ", level, " with", xp, " xp")
     print("Your pet has", petHealth, "health and have", petMana, "mana remaining!\n")
     option = int(input("Select Option: \n1. Fight \n2. Check Inventory\n3. Shop\n4. Save\n5. Load\n6. Pythamex\n0. Quit\n"))
@@ -286,7 +292,17 @@ while optionTrue == 0:
                         if potions <=0:
                             print("No potions left! Purchase some at the store.\n")
                         else:
-                            if petHealth >=200:
+                            if level == 0:
+                                petMaxHealth = 100
+                            elif level == 1:
+                                petMaxHealth = 150
+                            elif level ==2:
+                                petMaxHealth = 200
+                            elif level == 3:
+                                petMaxHealth = 250
+                            elif level > 3:
+                                petMaxHealth += 50
+                            if petHealth >= petMaxHealth:
                                 print("Pet at full health...\n")
                             else:
                                 petHealth = petHealth + potionRegen
@@ -302,9 +318,12 @@ while optionTrue == 0:
                         if mPotions <= 0:
                             print("No potions left! Purchase some at the store.\n")
                         else:
-                            petMana=petMana+mPotionRegen
-                            print("You now have", petMana, "magic\n")
-                            mPotions-=1
+                            if petMana >= 100:
+                                print("Pet mana already full...\n")
+                            else:
+                                petMana=petMana+mPotionRegen
+                                print("You now have", petMana, "magic\n")
+                                mPotions-=1
                 else:
                     print("No useable items...\n")
 
