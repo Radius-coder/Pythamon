@@ -279,25 +279,28 @@ while optionTrue == 0:
 
     elif option == 2:
                 print("Your inventory: \n", potions, "Health potion(s)\n", mPotions, "Magic Potion(s)\n", net, "Capture net(s)\n",  gold, "Gold\n")
-                proceed = int(input("If you have one would you like to use:\n1. Health Potion\n2. Magic Potion\n3. Go back\n"))
-                if proceed == 1:
-                    if potions <=0:
-                        print("No potions left! Purchase some at the store.\n")
-                    else:
-                        petHealth = petHealth + potionRegen
-                        print("You are now on", petHealth, "health\n")
-                        potions=potions-1
+                if potions > 0 or mPotions > 0:
+                    proceed = int(input("Would you like to use:\n1. Health Potion\n2. Magic Potion\n3. Go back\n"))
+                    if proceed == 1:
+                        if potions <=0:
+                            print("No potions left! Purchase some at the store.\n")
+                        else:
+                            petHealth = petHealth + potionRegen
+                            print("You are now on", petHealth, "health\n")
+                            potions=potions-1
                     
-                        if petHealth> 0:
-                            petAlive = 0
-                            attackTrue = 0
-                elif proceed == 2:
-                    if mPotions <= 0:
-                        print("No potions left! Purchase some at the store.\n")
-                    else:
-                        petMana=petMana+mPotionRegen
-                        print("You now have", petMana, "magic\n")
-                        mPotions-=1
+                            if petHealth> 0:
+                                petAlive = 0
+                                attackTrue = 0
+                    elif proceed == 2:
+                        if mPotions <= 0:
+                            print("No potions left! Purchase some at the store.\n")
+                        else:
+                            petMana=petMana+mPotionRegen
+                            print("You now have", petMana, "magic\n")
+                            mPotions-=1
+                else:
+                    print("No useable items...\n")
 
                         
                 
@@ -430,8 +433,8 @@ while optionTrue == 0:
             break
         else:
             optionTrue=0
-            
-     else:
-         print("Enter a valid choice.\n")
-         optionTrue=0
+
+    else:
+        print("Enter a valid choice.\n")
+        optionTrue=0
                     
