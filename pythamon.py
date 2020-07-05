@@ -17,7 +17,8 @@ mPotions = 1
 mPotionRegen = 100
 net = 1
 netPower = random.randint(1, 10)
-gold      = 300
+gold      = 400
+price = 0
 xp = 0
 level = 0
 collection = []
@@ -34,10 +35,9 @@ petAttack4 = random.randint(90, 200)
 name = input("Enter your name: ")
 petName = input("Enter your pet name: ")
 
+collection.append(petName)
+
 print("\nHello", name + " and", petName)
-
-
-
 
 optionTrue = 0
 while optionTrue == 0:
@@ -46,10 +46,8 @@ while optionTrue == 0:
                     level = 1
     elif xp > 3000 and xp < 7000:
                     level = 2
-                    petHealth = 200
     elif xp > 7000 and xp < 14000:
                     level = 3
-                    petHealth = 250
     elif xp > 14000:
                     level = level+1
                     
@@ -302,29 +300,35 @@ while optionTrue == 0:
                 
     elif option == 3:
                 print("Welcome to the shop, you have", gold, "gold\n")
-                proceed = int(input("What would you like to buy?\n1. Health Potion - 200\n2. Magic Potion - 200\n3. Capture net - 450\n4. Move learner- 1000\n5. Leave shop\n"))
+                proceed = int(input("What would you like to buy?\n1. Health Potion - 100\n2. Magic Potion - 200\n3. Capture net - 450\n4. Move learner- 1000\n5. Leave shop\n"))
                 if proceed == 1:
-                    if gold > 200:
+                    quantity = int(input("How many would you like?: \n"))
+                    price = 100*quantity
+                    if gold > price:
                         print("Thank you for your purchase!\nVisit your inventory to use potions\n")
-                        potions = potions+1
-                        gold = gold - 200
+                        potions = potions+quantity
+                        gold = gold - price
                     else:
                         print("Not enough gold...\n")
 
                 elif proceed == 2:
-                    if gold > 200:
+                    quantity = int(input("How many would you like?: \n"))
+                    price = 200 * quantity
+                    if gold > price:
                         print("Thank you for your purchase!\nVisit your inventory to use potions\n")
-                        mPotions = mPotions+1
-                        gold = gold - 200
+                        mPotions = mPotions+quantity
+                        gold = gold - price
 
                     else:
                         print("Not enough gold...\n")
 
                 elif proceed == 3:
-                    if gold > 450:
+                    quantity = int(input("How many would you like?: \n"))
+                    price = 450 * quantity
+                    if gold > price:
                         print("Thank you for your purchase!\nCapture nets can be used in battle\n")
-                        net +=1
-                        gold = gold - 450
+                        net +=quantity
+                        gold = gold - price
                     
                 elif proceed == 5:
                     print("Come again soon!\n")
