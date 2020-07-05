@@ -75,7 +75,17 @@ while optionTrue == 0:
     if option == 1:
         currentEnemy = enemyName[random.randint(1,9)]
         print("You are fighting", currentEnemy , "\n")
-        enemyHealth = 100
+        if level == 0:
+            enemyHealth = 100
+        elif level == 2:
+            enemyHealth = 150
+        elif level == 3:
+            enemyHealth = 200
+        elif level >3:
+            enemyHealth+=75
+        else:
+            enemyHealth = 100
+            
         attackTrue = 0
         while attackTrue == 0:
            
@@ -309,6 +319,9 @@ while optionTrue == 0:
                                 petHealth = petHealth + potionRegen
                                 print("You are now on", petHealth, "health\n")
                                 potions=potions-1
+
+                                if petHealth >= petMaxHealth:
+                                    petHealth = petMaxHealth
                     
                                 if petHealth> 0:
                                     petAlive = 0
@@ -326,6 +339,9 @@ while optionTrue == 0:
                                 petMana=petMana+mPotionRegen
                                 print("You now have", petMana, "magic\n")
                                 mPotions-=1
+
+                                if petMana >= 100:
+                                    petMana = 100
                 else:
                     print("No useable items...\n")
 
