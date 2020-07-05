@@ -57,7 +57,8 @@ while optionTrue == 0:
     
     netPower = random.randint(1, 10)
                                 
-
+    if petHealth > 200:
+        petHealth = 200
     print("You are level: ", level, " with", xp, " xp")
     print("Your pet has", petHealth, "health and have", petMana, "mana remaining!\n")
     option = int(input("Select Option: \n1. Fight \n2. Check Inventory\n3. Shop\n4. Save\n5. Load\n6. Pythamex\n0. Quit\n"))
@@ -285,13 +286,18 @@ while optionTrue == 0:
                         if potions <=0:
                             print("No potions left! Purchase some at the store.\n")
                         else:
-                            petHealth = petHealth + potionRegen
-                            print("You are now on", petHealth, "health\n")
-                            potions=potions-1
+                            if petHealth >=200:
+                                print("Pet at full health...\n")
+                            else:
+                                petHealth = petHealth + potionRegen
+                                print("You are now on", petHealth, "health\n")
+                                potions=potions-1
                     
-                            if petHealth> 0:
-                                petAlive = 0
-                                attackTrue = 0
+                                if petHealth> 0:
+                                    petAlive = 0
+                                    attackTrue = 0
+                            
+                            
                     elif proceed == 2:
                         if mPotions <= 0:
                             print("No potions left! Purchase some at the store.\n")
@@ -310,7 +316,7 @@ while optionTrue == 0:
                 if proceed == 1:
                     quantity = int(input("How many would you like?: \n"))
                     price = 100*quantity
-                    if gold > price:
+                    if gold >= price:
                         print("Thank you for your purchase!\nVisit your inventory to use potions\n")
                         potions = potions+quantity
                         gold = gold - price
@@ -320,7 +326,7 @@ while optionTrue == 0:
                 elif proceed == 2:
                     quantity = int(input("How many would you like?: \n"))
                     price = 200 * quantity
-                    if gold > price:
+                    if gold >= price:
                         print("Thank you for your purchase!\nVisit your inventory to use potions\n")
                         mPotions = mPotions+quantity
                         gold = gold - price
@@ -331,7 +337,7 @@ while optionTrue == 0:
                 elif proceed == 3:
                     quantity = int(input("How many would you like?: \n"))
                     price = 450 * quantity
-                    if gold > price:
+                    if gold >= price:
                         print("Thank you for your purchase!\nCapture nets can be used in battle\n")
                         net +=quantity
                         gold = gold - price
@@ -339,7 +345,7 @@ while optionTrue == 0:
                 elif proceed == 4:
                     quantity = int(input("How many would you like?: \n"))
                     price = 1000 * quantity
-                    if gold > price:
+                    if gold >= price:
                         print("TEST")
                 elif proceed == 5:
                     print("Come again soon!\n")
