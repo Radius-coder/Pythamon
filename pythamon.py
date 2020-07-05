@@ -65,6 +65,8 @@ while optionTrue == 0:
 
     if petMana > 100:
         petMana = 100
+    if petHealth < 0: 
+        petHealth = 0
     print("You are level: ", level, " with", xp, " xp")
     print("Your pet has", petHealth, "health and has", petMana, "mana remaining!\n")
     option = int(input("Select Option: \n1. Fight \n2. Check Inventory\n3. Shop\n4. Save\n5. Load\n6. Pythamex\n0. Quit\n"))
