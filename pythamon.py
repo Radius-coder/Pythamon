@@ -75,9 +75,8 @@ while optionTrue == 0:
     if option == 1:
         currentEnemy = enemyName[random.randint(1,9)]
         print("You are fighting", currentEnemy , "\n")
-        if level == 0:
-            enemyHealth = 100
-        elif level == 2:
+        
+        if level == 2:
             enemyHealth = 150
         elif level == 3:
             enemyHealth = 200
