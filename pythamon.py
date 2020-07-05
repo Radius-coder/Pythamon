@@ -303,6 +303,7 @@ while optionTrue == 0:
                             elif level > 3:
                                 petMaxHealth += 50
                             if petHealth >= petMaxHealth:
+                                petHealth = petMaxHealth
                                 print("Pet at full health...\n")
                             else:
                                 petHealth = petHealth + potionRegen
@@ -319,6 +320,7 @@ while optionTrue == 0:
                             print("No potions left! Purchase some at the store.\n")
                         else:
                             if petMana >= 100:
+                                petMana = 100
                                 print("Pet mana already full...\n")
                             else:
                                 petMana=petMana+mPotionRegen
