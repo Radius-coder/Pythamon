@@ -1,5 +1,8 @@
 #pythamon the text pokemon game
 import random, sys
+from encryptor import encryption
+from encryptor import decryption
+
 original_stdout = sys.stdout
 
 petHealth = 100
@@ -341,21 +344,46 @@ while optionTrue == 0:
     elif option == 4:
         fileName = input("Name Save: ")
         print("\nSaving game...\n")
+        #variables have to be converted to string before it gets encrypted
+        level = str(level)
+        gold = str(gold)
+        xp = str(xp)
+        potions = str(potions)
+        mPotions = str(mPotions)
+        net = str(net)
+        
+        
+        eLevel = encryption(level)
+        eGold = encryption(gold)
+        eXp = encryption(xp)
+        ePotions = encryption(potions)
+        eMPotions = encryption(mPotions)
+        eNet = encryption(net)
+        eCollection = encryption(collection)
         file = open(fileName + '.txt', 'w')
         with file as fw:
             sys.stdout = fw
             print(name)
             print(petName)
-            print(level)
-            print(gold)
-            print(xp)
-            print(potions)
-            print(mPotions)
-            print(net)
-            print(collection)
+            print(eLevel)
+            print(eGold)
+            print(eXp)
+            print(ePotions)
+            print(eMPotions)
+            print(eNet)
+            print(eCollection)
             sys.stdout = original_stdout
             print("File saved\n")
         fw.close()
+
+        #convert back to integers to avoid errors
+
+        level = int(level)
+        gold = int(gold)
+        xp = int(xp)
+        potions = int(potions)
+        mPotions = int(mPotions)
+        net = int(net)
 
     elif option == 5:
         fileName = input("Enter the save name you wish to load\n")
@@ -365,8 +393,10 @@ while optionTrue == 0:
             petName = file.readline()
             print("Pet name: ", petName)
             level = file.readline()
+            level = decryption(level)
             print("Level: ", level)
             gold = file.readline()
+            gold = decryption(gold)
             print("Gold: ", gold)
             xp = file.readline()
             print("XP: ", xp)
