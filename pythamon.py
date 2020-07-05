@@ -329,7 +329,12 @@ while optionTrue == 0:
                         print("Thank you for your purchase!\nCapture nets can be used in battle\n")
                         net +=quantity
                         gold = gold - price
-                    
+
+                elif proceed == 4:
+                    quantity = int(input("How many would you like?: \n"))
+                    price = 1000 * quantity
+                    if gold > price:
+                        print("TEST")
                 elif proceed == 5:
                     print("Come again soon!\n")
 
@@ -343,8 +348,11 @@ while optionTrue == 0:
             print(petName)
             print(level)
             print(gold)
-            print(potions)
             print(xp)
+            print(potions)
+            print(mPotions)
+            print(net)
+            print(collection)
             sys.stdout = original_stdout
             print("File saved\n")
         fw.close()
@@ -355,15 +363,21 @@ while optionTrue == 0:
             name = file.readline()
             print("Name: ", name)
             petName = file.readline()
-            print("\nPet name: ", petName)
+            print("Pet name: ", petName)
             level = file.readline()
-            print("\nLevel: ", level)
+            print("Level: ", level)
             gold = file.readline()
-            print("\nGold: ", gold)
-            potions = file.readline()
-            print("\nPotions: ", potions)
+            print("Gold: ", gold)
             xp = file.readline()
-            print("\nXP: ", xp)
+            print("XP: ", xp)
+            potions = file.readline()
+            print("Health Potions: ", potions)
+            mPotions = file.readline()
+            print("Mana Potions: ", mPotions)
+            net = file.readline()
+            print("Capture Nets: ", net)
+            collection = file.readline()
+            print("Collection: ", collection)
             gold = int(gold)
             xp = int(xp)
         file.close()
