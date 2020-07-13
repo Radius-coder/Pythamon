@@ -1,5 +1,5 @@
 #pythamon the text pokemon game
-import random, sys
+import random, sys, time
 from encryptor import encryption
 from encryptor import decryption
 
@@ -11,8 +11,10 @@ petMana = 100
 enemyHealth = 100
 name      = ""
 petName   = ""
-petStamina  = 100
 petAlive = 0
+gamesPlayed = 3
+bossBattle = 0
+
 
 enemyName = ["Bob", "Dani", "Alex", "Peter", "Tyler", "Charlie", "Ryan", "Chris", "Jordan", "Tom"]
 potions = 1
@@ -65,14 +67,16 @@ while optionTrue == 0:
 
     if petMana > 100:
         petMana = 100
-    if petHealth < 0: 
+    if petHealth < 0:
         petHealth = 0
     print("You are level: ", level, " with", xp, " xp")
     print("Your pet has", petHealth, "health and has", petMana, "mana remaining!\n")
-    option = int(input("Select Option: \n1. Fight \n2. Check Inventory\n3. Shop\n4. Save\n5. Load\n6. Pythamex\n0. Quit\n"))
+    time.sleep(2)
+    option = int(input("Select Option: \n1. Fight \n2. Check Inventory\n3. Shop\n4. Save\n5. Load\n6. Pythamex\n7. Walk\n0. Quit\n"))
 
     if petAlive == 1:
         print("Your pet is unconcious. Please use a potion.\n")
+        time.sleep(2)
         
     if option == 1:
         currentEnemy = enemyName[random.randint(1,9)]
@@ -84,6 +88,8 @@ while optionTrue == 0:
             enemyHealth = 200
         elif level >3:
             enemyHealth+=75
+        elif level == 10:
+            bossBattle = 1
         else:
             enemyHealth = 100
             
@@ -97,6 +103,10 @@ while optionTrue == 0:
                     
                     
                 if attack == "1":
+                    if petHealth <=0:
+                        print("Your pet has fainted. Use a potion to revive it...\n")
+                        time.sleep(2)
+                        attackTrue = 1
                     if xp > 3000 and xp < 7000:
                         enemyAttack1 = random.randint(10, 100)
                     elif xp > 14000:
@@ -114,25 +124,32 @@ while optionTrue == 0:
                         print("You gained",tempxp, "xp\n")
                         print("You now have", gold, "gold\n")
                         xp = xp + tempxp
+                        gamesPlayed -= 1
                         attackTrue = 1
+                        time.sleep(2)
                         break
                     else:
-                        print("They are now on", enemyHealth , " health\n...")
+                        print("They are now on", enemyHealth , " health\n")
+                        time.sleep(2)
 
                     petHealth = petHealth - enemyAttack1
                     print("They did ",enemyAttack1,  " damage to you")
-                    print("You are now on", petHealth , " hp\n")                            
+                    print("You are now on", petHealth , " hp\n")       
+                    time.sleep(2)                     
                             
 
                     if petHealth <=0:
                         print("Your pet has fainted!\n")
                         print("Visit a shop to buy health potions...\n")
+                        time.sleep(2)
                         petAlive=1
                         attackTrue=1
                         break
 
                     else:
-                        print("Prepare for the next move\n...")
+                        print("Prepare for the next move\n")
+                        time.sleep(1)
+                        
                         attackTrue = 0
 
                 elif attack == "2":
@@ -153,24 +170,30 @@ while optionTrue == 0:
                         print("You gained",tempxp, "xp\n")
                         print("You now have", gold, "gold\n")
                         xp = xp + tempxp
+                        gamesPlayed -=1
+                        time.sleep(2)
                         attackTrue=1
                         break
                     else:
                             print("They are now on", enemyHealth , " health\n")
+                            time.sleep(2)
                             petHealth = petHealth - enemyAttack1
                             print("They did ",enemyAttack1,  " damage to you\n")
                             print("You are now on", petHealth , " hp\n")
+                            time.sleep(2)
 
                             
                             if petHealth <=0:
                                 print("Your pet has fainted!\n")
                                 print("Visit a shop to buy health potions...\n")
+                                time.sleep(2)
                                 petAlive=1
                                 attackTrue=1
                                 break
 
                             else:
                                 print("Prepare for the next move...\n")
+                                time.sleep(1)
                                 attackTrue = 0
 
 
@@ -183,6 +206,7 @@ while optionTrue == 0:
                         enemyAttack1 = random.randint(1, 50)
                     if petMana <25:
                         print("Not enough mana! Select a different move\n")
+                        time.sleep(1)
                     else:
                             petMana-=25
                             petAttack3 = random.randint(40, 100)
@@ -196,9 +220,12 @@ while optionTrue == 0:
                                 print("You now have", gold, "gold\n")
                                 xp = xp + tempxp
                                 attackTrue=1
+                                gamesPlayed -=1
+                                time.sleep(2)
                                 break
                             else:
                                 print("They are now on", enemyHealth , " health\n")
+                                time.sleep(2)
 
                             petHealth = petHealth - enemyAttack1
                             print("They did ",enemyAttack1,  " damage to you\n")
@@ -208,14 +235,16 @@ while optionTrue == 0:
                             if petHealth <=0:
                                 print("Your pet has fainted!\n")
                                 print("Visit a shop to buy health potions...\n")
+                                time.sleep(2)
                                 petAlive=1
                                 attackTrue=1
                                 break
 
                             else:
                                 print("You are now on", petHealth , " health and have", petMana, "mana remaining!\n")
-                                
+                                time.sleep(2)
                                 print("Prepare for the next move...\n")
+                                time.sleep(1)
                                 attackTrue = 0
 
 
@@ -228,6 +257,7 @@ while optionTrue == 0:
                         enemyAttack1 = random.randint(1, 50)
                     if petMana <50:
                         print("Not enough mana! Select a different move\n")
+                        time.sleep(1)
                     else:
                             petMana-=50
                             petAttack4 = random.randint(90, 200)
@@ -240,34 +270,42 @@ while optionTrue == 0:
                                 print("You gained",tempxp, "xp\n")
                                 print("You now have", gold, "gold\n")
                                 xp = xp + tempxp
+                                gamesPlayed -=1
                                 attackTrue=1
+                                time.sleep(2)
                                 break
                             else:
                                 print("They are now on", enemyHealth , " health\n")
+                                time.sleep(2)
 
                             petHealth = petHealth - enemyAttack1
                             print("They did ",enemyAttack1,  " damage to you\n")
                             print("You are now on", petHealth , " hp\n")
+                            time.sleep(2)
 
                             if petHealth <=0:
                                 print("Your pet has fainted!\n")
                                 print("Visit a shop to buy health potions...\n")
                                 petAlive=1
                                 attackTrue=1
+                                time.sleep(2)
                                 break
 
                             else:
                                 print("Prepare for the next move...\n")
+                                time.sleep(1)
                                 attackTrue = 0
 
 
                 elif attack == "5":
                     if net <1:
                         print("Buy a net from the shop to use\n")
+                        time.sleep(1)
                         attackTrue=0
                     else:
                         net-=1
                         print("You throw the net...\n")
+                        time.sleep(2)
                         if netPower > 8:
                             print("Congratulations this monster has been caught!\n")
                             collection.append(currentEnemy)
@@ -276,23 +314,28 @@ while optionTrue == 0:
                             print("You gained",tempxp, "xp\n")
                             print("You now have", gold, "gold\n")
                             xp = xp + tempxp
+                            gamesPlayed -=1
                             attackTrue=1
+                            time.sleep(2)
                             break
                             
                         else:
                             print("Capture failed, better luck next time.\n")
                             netPower = random.randint(1, 10)
                             print("Prepare for the next move...\n")
+                            time.sleep(2)
                             attackTrue = 0  
 
 
                 elif attack == "6":
                                 print("You ran away!\n")
+                                time.sleep(2)
                                 attackTrue=1
                                 break
 
                 if not attack:
                             print("Select a valid move\n")
+                            time.sleep(1)
                     
 
     elif option == 2:
@@ -316,9 +359,11 @@ while optionTrue == 0:
                             if petHealth >= petMaxHealth:
                                 petHealth = petMaxHealth
                                 print("Pet at full health...\n")
+                                time.sleep(2)
                             else:
                                 petHealth = petHealth + potionRegen
                                 print("You are now on", petHealth, "health\n")
+                                time.sleep(2)
                                 potions=potions-1
 
                                 if petHealth >= petMaxHealth:
@@ -332,51 +377,60 @@ while optionTrue == 0:
                     elif proceed == 2:
                         if mPotions <= 0:
                             print("No potions left! Purchase some at the store.\n")
+                            time.sleep(2)
                         else:
                             if petMana >= 100:
                                 petMana = 100
                                 print("Pet mana already full...\n")
+                                time.sleep(2)
                             else:
                                 petMana=petMana+mPotionRegen
                                 print("You now have", petMana, "magic\n")
+                                time.sleep(2)
                                 mPotions-=1
 
                                 if petMana >= 100:
                                     petMana = 100
                 else:
                     print("No useable items...\n")
-
+                    time.sleep(2)
                         
                 
     elif option == 3:
                 print("Welcome to the shop, you have", gold, "gold\n")
+                
                 proceed = int(input("What would you like to buy?\n1. Health Potion - 100\n2. Magic Potion - 200\n3. Capture net - 450\n4. Move learner- 1000\n5. Leave shop\n"))
                 if proceed == 1:
                     quantity = int(input("How many would you like?: \n"))
                     price = 100*quantity
                     if gold >= price:
                         print("Thank you for your purchase!\nVisit your inventory to use potions\n")
+                        time.sleep(2)
                         potions = potions+quantity
                         gold = gold - price
                     else:
                         print("Not enough gold...\n")
+                        time.sleep(2)
 
                 elif proceed == 2:
                     quantity = int(input("How many would you like?: \n"))
                     price = 200 * quantity
                     if gold >= price:
                         print("Thank you for your purchase!\nVisit your inventory to use potions\n")
+                        time.sleep(2)
                         mPotions = mPotions+quantity
                         gold = gold - price
 
                     else:
                         print("Not enough gold...\n")
+                        time.sleep(2)
 
                 elif proceed == 3:
                     quantity = int(input("How many would you like?: \n"))
                     price = 450 * quantity
                     if gold >= price:
                         print("Thank you for your purchase!\nCapture nets can be used in battle\n")
+                        time.sleep(2)
                         net +=quantity
                         gold = gold - price
 
@@ -387,10 +441,12 @@ while optionTrue == 0:
                         print("TEST")
                 elif proceed == 5:
                     print("Come again soon!\n")
+                    time.sleep(2)
 
     elif option == 4:
         fileName = input("Name Save: ")
         print("\nSaving game...\n")
+        time.sleep(2)
         #variables have to be converted to string before it gets encrypted
         level = str(level)
         gold = str(gold)
@@ -420,6 +476,7 @@ while optionTrue == 0:
             print(collection)
             sys.stdout = original_stdout
             print("File saved\n")
+            time.sleep(2)
         fw.close()
 
         #convert back to integers to avoid errors
@@ -464,11 +521,39 @@ while optionTrue == 0:
             potions = int(potions)
             mPotions = int(mPotions)
             net = int(net)
+            
         file.close()
 
     elif option == 6:
                 print("Your collection: \n", collection)
-               
+    
+    elif option == 7:
+        if gamesPlayed > 0:
+            print("You must play some more games before your next walk!\n")
+            time.sleep(2)
+        else:
+            print("You prepare to go for a walk...\n")
+            print("You have a chance to find random rewards during a walk.")
+            time.sleep(2)
+            luck = random.randint(1, 15)
+            if luck > 10:
+                gold = gold + random.randint(500, 3000)
+                tempxp =  random.randint(500,3000)
+                print("You gained",tempxp, "xp\n")
+                print("You now have", gold, "gold\n")
+                xp = xp + tempxp
+                #Player has to do 3 more games before the next walk
+                gamesPlayed = 3
+                optionTrue = 0
+                time.sleep(2)
+            else:
+                print("Walk complete. Your pet couldn't find any presents.\n")
+                time.sleep(2)
+                gamesPlayed = 3
+                optionTrue = 0
+            
+
+    
         
     elif option == 0:
         answer = int(input("Are you sure you want to quit...\n1. Yes\n2. No\n"))
@@ -480,5 +565,9 @@ while optionTrue == 0:
 
     else:
         print("Enter a valid choice.\n")
+        time.sleep(2)
         optionTrue=0
                     
+      
+
+                
