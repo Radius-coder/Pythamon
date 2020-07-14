@@ -7,7 +7,6 @@ Need to add ability to swap monsters and store each monsters level and stats
 Need to add some sort of quest system that gives rewards and xp e.g. defeat 3 enemies without going under 50hp for 3000 gold
 Need to add more modifiers like armor
 
-Boss battles? when reached certain levels the player can challenge thesmself with a harder fight
 Add different titles based on level
 
 Also need to clean up code, make functions etc etc.
